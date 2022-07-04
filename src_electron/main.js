@@ -1,6 +1,7 @@
 const { app, BrowserWindow } = require('electron')
-require('dotenv').config({ path: '../.env' })
+const path = require('path')
 
+require('dotenv').config({ path: '../.env' })
 require('./connection')
 
 function createWindow () {
@@ -9,13 +10,14 @@ function createWindow () {
     height: 600,
     webPreferences: {
       nodeIntegration: true,
-      nativeWindowOpen: true
+      nativeWindowOpen: true,
+      preload: path.join(__dirname, 'preload.js')
     }
   })
 
   // createMainWindow.loadFile('index.html')
-  createMainWindow.maximize()
   createMainWindow.loadURL('http://localhost:3000')
+  createMainWindow.maximize()
 }
 
 app.whenReady().then(createWindow)
