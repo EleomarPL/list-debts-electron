@@ -1,0 +1,44 @@
+{
+  "name": "list-debts",
+  "private": true,
+  "description": "App to manage debts",
+  "main": "./src_electron/main.js",
+  "author": {
+    "name": "Eleomar Pedro Lorenzo",
+    "email": "eleomarpedrolorenzo@gmail.com",
+    "url": "https://eleomarpl.dev"
+  },
+  "license": "MIT",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "electron": "electron ./src_electron/main.js"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "bootstrap": "^5.1.3",
+    "bootstrap-icons": "^1.8.3",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-helmet": "^6.1.0",
+    "react-router-dom": "^6.3.0",
+    "react-toastify": "^9.0.5",
+    "styled-components": "^5.3.5",
+    "validator": "^13.7.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@vitejs/plugin-react": "^1.3.0",
+    "electron": "^19.0.7",
+    "eslint": "^8.19.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.4",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.30.1",
+    "vite": "^2.9.9"
+  }
+}
