@@ -33,8 +33,8 @@ const App = () => {
             }
           />
         </Route>
-        <Route path="admin" element={ <AdminRoute /> }>
-          <Route index
+        <Route element={ <AdminRoute /> }>
+          <Route path="admin/*"
             element={
               <>
                 <Suspense fallback={ <SpinnerLoadingPage /> }>
@@ -44,8 +44,8 @@ const App = () => {
             }
           />
         </Route>
-        <Route path="user" element={ <UserRoute /> }>
-          <Route index
+        <Route element={ <UserRoute /> }>
+          <Route path="user/*"
             element={
               <>
                 <Suspense fallback={ <SpinnerLoadingPage /> }>
