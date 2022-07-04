@@ -1,3 +1,4 @@
+import { Suspense, lazy } from 'react'
 import { ToastContainer } from 'react-toastify'
 import { Routes, Route } from 'react-router-dom'
 
@@ -11,9 +12,11 @@ import PublicRoute from './components/routers/PublicRoute'
 import AdminRoute from './components/routers/AdminRoute'
 import UserRoute from './components/routers/UserRoute'
 
-import Index from './pages/Index'
-import Admin from './pages/Admin'
-import User from './pages/User'
+import SpinnerLoadingPage from './components/common/SpinnerLoadingPage'
+
+const Index = lazy(() => import('./pages/Index'))
+const Admin = lazy(() => import('./pages/Admin'))
+const User = lazy(() => import('./pages/User'))
 
 const App = () => {
   return (
@@ -23,7 +26,9 @@ const App = () => {
           <Route index
             element={
               <>
-                <Index />
+                <Suspense fallback={ <SpinnerLoadingPage /> }>
+                  <Index />
+                </Suspense>
               </>
             }
           />
@@ -32,7 +37,9 @@ const App = () => {
           <Route index
             element={
               <>
-                <Admin />
+                <Suspense fallback={ <SpinnerLoadingPage /> }>
+                  <Admin />
+                </Suspense>
               </>
             }
           />
@@ -41,7 +48,9 @@ const App = () => {
           <Route index
             element={
               <>
-                <User />
+                <Suspense fallback={ <SpinnerLoadingPage /> }>
+                  <User />
+                </Suspense>
               </>
             }
           />
