@@ -1,4 +1,7 @@
 const { app, BrowserWindow } = require('electron')
+require('dotenv').config({ path: '../.env' })
+
+require('./connection')
 
 function createWindow () {
   const createMainWindow = new BrowserWindow({
