@@ -2,9 +2,9 @@ import { Routes, Route } from 'react-router-dom'
 
 import UserLayout from '../components/layouts/UserLayout'
 
-import AddDebt from '../subpages/user/AddDebt'
+import AddDebt from '../components/views/AddDebt'
 import AddDebtor from '../components/views/AddDebtor'
-import PayDebt from '../subpages/user/PayDebt'
+import PayDebt from './components/views/PayDebt'
 
 const User = () => {
   return (
