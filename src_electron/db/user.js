@@ -3,6 +3,16 @@ const bcrypt = require('bcrypt')
 const User = require('../models/User')
 const handleErrors = require('../utils/handleErrors')
 
+const isThereAdmin = async () => {
+  try {
+    const user = await User.findOne({ type: 0 })
+    if (!user) return true
+
+    return false
+  } catch (error) {
+    return handleErrors({ error })
+  }
+}
 const initialInsertAdmin = async ({
   name, lastName, motherLastName, username, password
 }) => {
@@ -84,5 +94,6 @@ const updateUser = async ({
 module.exports = {
   initialInsertAdmin,
   insertNewUser,
-  updateUser
+  updateUser,
+  isThereAdmin
 }
