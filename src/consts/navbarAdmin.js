@@ -18,5 +18,10 @@ export const navbarAdmin = [
     text: 'Ver Pagos',
     link: 'show-pays',
     icon: 'bi bi-list-check'
+  },
+  {
+    text: 'Agregar Usuario',
+    link: 'add-user',
+    icon: 'bi bi-person-plus-fill'
   }
 ]

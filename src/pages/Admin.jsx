@@ -4,6 +4,7 @@ import AdminLayout from '../components/layouts/AdminLayout'
 
 import AddDebt from '../subpages/admin/AddDebt'
 import AddDebtor from '../subpages/admin/AddDebtor'
+import AddUser from '../subpages/admin/AddUser'
 import PayDebt from '../subpages/admin/PayDebt'
 import ShowPays from '../subpages/admin/ShowPays'
 
@@ -36,6 +37,13 @@ const Admin = () => {
           element={
             <>
               <ShowPays />
+            </>
+          }
+        />
+        <Route path="add-user"
+          element={
+            <>
+              <AddUser />
             </>
           }
         />
