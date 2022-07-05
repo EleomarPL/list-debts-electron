@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import Icon from '../common/Icon'
+import SwitchColor from './SwitchColor'
 
 const Header = ({ listNavbar }) => {
   return (
@@ -35,7 +36,7 @@ const Header = ({ listNavbar }) => {
           </ul>
           <ul className="navbar-nav mr-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <span>Switch color</span>
+              <SwitchColor />
             </li>
           </ul>
         </div>
