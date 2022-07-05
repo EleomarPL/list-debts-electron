@@ -36,6 +36,7 @@ const Index = () => {
                 />
                 <PrimaryButton className="w-100"
                   isLoading={ isLoading }
+                  classNameIcon="bi bi-arrow-right-square-fill"
                 >
                   Iniciar Sesión
                 </PrimaryButton>
