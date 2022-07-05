@@ -3,12 +3,16 @@ import styled from 'styled-components'
 
 import PrimaryButton from '../components/buttons/PrimaryButton'
 import PersonalizedInput from '../components/common/PersonalizedInput'
-import ModalCreateAdmin, { openModalCreateAdmin } from '../components/modals/ModalCreateAdmin'
+import ModalCreateAdmin from '../components/modals/ModalCreateAdmin'
+import useInitialOperations from '../hooks/useInitialOperations'
+
 const Index = () => {
   const [isLoading, setIsLoading] = useState(false)
 
+  const { isThereAdmin } = useInitialOperations()
+
   useEffect(() => {
-    // openModalCreateAdmin()
+    isThereAdmin()
   }, [])
 
   const handleLogin = (evt) => {
