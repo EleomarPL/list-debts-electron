@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import UserLayout from '../components/layouts/UserLayout'
 
 import AddDebt from '../subpages/user/AddDebt'
-import AddDebtor from '../subpages/user/AddDebtor'
+import AddDebtor from '../components/views/AddDebtor'
 import PayDebt from '../subpages/user/PayDebt'
 
 const User = () => {

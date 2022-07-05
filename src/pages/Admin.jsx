@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import AdminLayout from '../components/layouts/AdminLayout'
 
 import AddDebt from '../subpages/admin/AddDebt'
-import AddDebtor from '../subpages/admin/AddDebtor'
+import AddDebtor from '../components/views/AddDebtor'
 import AddUser from '../subpages/admin/AddUser'
 import PayDebt from '../subpages/admin/PayDebt'
 import ShowPays from '../subpages/admin/ShowPays'
