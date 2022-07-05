@@ -2,13 +2,13 @@ const { ipcMain } = require('electron')
 
 const { isThereAdmin } = require('../db/user')
 
-const triggerEventsLogin = () => {
+const triggerEventsInitital = () => {
   ipcMain.handle('initial:is-there-admin', async () => {
     const result = await isThereAdmin()
-    if (result?.error) return false
+    if (result?.error) return { error: true }
 
     return result
   })
 }
 
-module.exports = { triggerEventsLogin }
+module.exports = { triggerEventsInitital }

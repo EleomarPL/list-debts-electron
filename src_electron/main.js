@@ -4,6 +4,8 @@ const path = require('path')
 require('dotenv').config({ path: '../.env' })
 require('./connection')
 
+const { triggerEventsInitital } = require('./evtContextBridge/inititalOperation')
+
 function createWindow () {
   const createMainWindow = new BrowserWindow({
     width: 800,
@@ -18,6 +20,8 @@ function createWindow () {
   // createMainWindow.loadFile('index.html')
   createMainWindow.loadURL('http://localhost:3000')
   createMainWindow.maximize()
+
+  triggerEventsInitital()
 }
 
 app.whenReady().then(createWindow)
