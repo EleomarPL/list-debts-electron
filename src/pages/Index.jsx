@@ -1,11 +1,15 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 import PrimaryButton from '../components/buttons/PrimaryButton'
 import PersonalizedInput from '../components/common/PersonalizedInput'
-
+import ModalCreateAdmin, { openModalCreateAdmin } from '../components/modals/ModalCreateAdmin'
 const Index = () => {
   const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    // openModalCreateAdmin()
+  }, [])
 
   const handleLogin = (evt) => {
     evt.preventDefault()
@@ -46,6 +50,7 @@ const Index = () => {
           </div>
         </div>
       </Section>
+      <ModalCreateAdmin />
     </Main>
   )
 }
