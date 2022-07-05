@@ -1,6 +1,6 @@
 const { connect } = require('mongoose')
 
-const stringConnection = process.env.MONGO_STRING_CONNECTION
+const stringConnection = 'mongodb://localhost:27017/listdebts'
 
 connect(stringConnection)
   .then(() => {
