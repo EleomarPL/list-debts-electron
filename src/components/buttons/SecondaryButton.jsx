@@ -2,10 +2,11 @@ import PropTypes from 'prop-types'
 import Icon from '../common/Icon'
 import SpinnerLoadingButton from '../common/SpinnerLoadingButton'
 
-const PrimaryButton = ({ children, className, isLoading, classNameIcon }) => {
+const SecondaryButton = ({ children, className, isLoading, classNameIcon, onClick, disabled }) => {
   return (
     <button className={ `btn btn-primary ${className}` }
-      type="submit" disabled={ isLoading }
+      type="button" disabled={ isLoading || disabled }
+      onClick={ onClick }
     >
       { isLoading && <SpinnerLoadingButton /> }
       <Icon className={ classNameIcon } />
@@ -14,11 +15,13 @@ const PrimaryButton = ({ children, className, isLoading, classNameIcon }) => {
   )
 }
 
-PrimaryButton.propTypes = {
+SecondaryButton.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
   isLoading: PropTypes.bool,
-  classNameIcon: PropTypes.string
+  onClick: PropTypes.func.isRequired,
+  classNameIcon: PropTypes.string,
+  disabled: PropTypes.bool.isRequired
 }
 
-export default PrimaryButton
+export default SecondaryButton
