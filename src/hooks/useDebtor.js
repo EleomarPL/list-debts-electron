@@ -4,6 +4,15 @@ import { notifyError, notifyInfo, notifySuccess } from '../consts/notifications'
 const useDebtor = () => {
   const token = useSelector(state => state.session.value.token)
 
+  const getDebtors = async () => {
+    const resultGetDebtors = await window.electron.invoke('debtor:getDebtors', { token })
+    if (!resultGetDebtors) {
+      notifyError('Error al obtener deudores')
+      return false
+    }
+
+    return resultGetDebtors
+  }
   const insertDebtor = async ({ name, lastName, motherLastName, address }) => {
     const result = await window.electron.invoke(
       'debtor:insertDebtor',
@@ -24,7 +33,7 @@ const useDebtor = () => {
   }
 
   return {
-    insertDebtor
+    insertDebtor, getDebtors
   }
 }
 

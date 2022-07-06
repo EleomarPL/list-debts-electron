@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import PrimaryButton from '../buttons/PrimaryButton'
@@ -12,13 +12,19 @@ const AddDebtor = () => {
   const [listDebtors, setListDebtors] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [dataModal, setDataModal] = useState({
-    idDebtor: 0,
+    idDebtor: '',
     address: ''
   })
   const formRef = useRef({})
 
   const user = useSelector(state => state.session.value)
-  const { insertDebtor } = useDebtor()
+  const { insertDebtor, getDebtors } = useDebtor()
+
+  useEffect(() => {
+    getDebtors().then(res => {
+      if (res) setListDebtors(res)
+    })
+  }, [])
 
   const handleAddDebtor = (evt) => {
     evt.preventDefault()
@@ -94,21 +100,23 @@ const AddDebtor = () => {
               </tr>
             </thead>
             <tbody>
-              { listDebtors.map(debtor => (
-                <tr key={ debtor.id }>
-                  <td>{ debtor.name }</td>
-                  <td>{ debtor.lastName }</td>
-                  <td>{ debtor.motherLastName }</td>
-                  <td>{ debtor.address }</td>
-                  { user.type === 0 &&
-                    <td>
-                      <ModifyButton
-                        onClick={ () => handleOpenModal({ idDebtor: debtor.id, address: debtor.address }) }
-                      />
-                    </td>
-                  }
-                </tr>
-              )) }
+              { listDebtors &&
+                listDebtors.map(debtor => (
+                  <tr key={ debtor.id }>
+                    <td>{ debtor.name }</td>
+                    <td>{ debtor.lastName }</td>
+                    <td>{ debtor.motherLastName }</td>
+                    <td>{ debtor.address }</td>
+                    { user.type === 0 &&
+                      <td>
+                        <ModifyButton
+                          onClick={ () => handleOpenModal({ idDebtor: debtor.id, address: debtor.address }) }
+                        />
+                      </td>
+                    }
+                  </tr>
+                ))
+              }
             </tbody>
           </PersonalizedTable>
         </section>

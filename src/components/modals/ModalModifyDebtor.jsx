@@ -49,7 +49,7 @@ const ModalModifyDebtor = ({ idDebtor, address }) => {
 }
 
 ModalModifyDebtor.propTypes = {
-  idDebtor: PropTypes.number.isRequired,
+  idDebtor: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired
 }
 
