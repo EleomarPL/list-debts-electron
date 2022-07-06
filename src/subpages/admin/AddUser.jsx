@@ -4,10 +4,13 @@ import PrimaryButton from '../../components/buttons/PrimaryButton'
 import PersonalizedTable from '../../components/common/PersonalizedTable'
 import TitlePage from '../../components/common/TitlePage'
 import useUser from '../../hooks/useUser'
+import ModalModifyUser, { openModalModifyUser } from '../../components/modals/ModalModifyUser'
+import ModifyButton from '../../components/buttons/ModifyButton'
 
 const AddUser = () => {
   const [listUsers, setListUsers] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const [dataUser, setDataUser] = useState({})
   const formRef = useRef({})
 
   const { getUsers, insertUser } = useUser()
@@ -35,6 +38,10 @@ const AddUser = () => {
         setListUsers([res, ...listUsers])
       }
     })
+  }
+  const handleOpenModal = (user) => {
+    setDataUser(user)
+    openModalModifyUser()
   }
 
   return (
@@ -91,6 +98,7 @@ const AddUser = () => {
                 <th>Apellido Paterno</th>
                 <th>Apellido Materno</th>
                 <th>Usuario</th>
+                <th>Modificar</th>
               </tr>
             </thead>
             <tbody>
@@ -100,12 +108,22 @@ const AddUser = () => {
                   <td>{ user.lastName }</td>
                   <td>{ user.motherLastName }</td>
                   <td>{ user.username }</td>
+                  <td>
+                    <ModifyButton
+                      onClick={ () => handleOpenModal(user) }
+                    />
+                  </td>
                 </tr>
               )) }
             </tbody>
           </PersonalizedTable>
         </section>
       </div>
+      <ModalModifyUser
+        dataUser={ dataUser }
+        listUsers={ listUsers }
+        setListUsers={ setListUsers }
+      />
     </>
   )
 }
