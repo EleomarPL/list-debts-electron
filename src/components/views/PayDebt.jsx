@@ -22,6 +22,7 @@ const PayDebt = () => {
         if (res) setListDebts(res)
       })
     }
+    setPay('')
   }, [debtor])
   useEffect(() => {
     seTotal(listDebts.reduce((total, debt) => {
@@ -61,6 +62,7 @@ const PayDebt = () => {
       setIsLoading(false)
       if (res) {
         setListDebts(listDebts.filter(debt => !debt.box))
+        setPay('')
       }
     })
   }
