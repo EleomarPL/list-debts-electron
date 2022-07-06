@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import DeleteButton from '../buttons/DeleteButton'
 
 import PrimaryButton from '../buttons/PrimaryButton'
@@ -9,26 +9,42 @@ import InputSelectDebtor from './InputSelectDebtor'
 
 const AddDebt = () => {
   const [listDebts, setListDebts] = useState([])
+  const [debtor, setDebtor] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+
+  const formRef = useRef({})
 
   const handleAddPosibleDebt = (evt) => {
     evt.preventDefault()
+
+    setListDebts([...listDebts, {
+      article: evt.target[0].value,
+      description: evt.target[1].value,
+      total: evt.target[2].value
+    }])
+    setDebtor('')
+    formRef.current.reset()
   }
   const handleSaveDebts = () => {
     setIsLoading(true)
   }
   const handleDeleteArticle = (index) => {
-
+    setListDebts(listDebts.filter((_, i) => i !== index))
   }
 
   return (
     <>
       <TitlePage>Agregar Deuda</TitlePage>
       <div className="col-md-12">
-        <InputSelectDebtor />
+        <InputSelectDebtor
+          debtor={ debtor }
+          setDebtor={ setDebtor }
+        />
         <div className="row">
           <section className="col-md-4">
-            <form className="w-100" onSubmit={ handleAddPosibleDebt }>
+            <form className="w-100" onSubmit={ handleAddPosibleDebt }
+              ref={ formRef }
+            >
               <div className="mb-3 w-100">
                 <label htmlFor="article" className="form-label">Articulo</label>
                 <input type="text" className="form-control"
@@ -61,7 +77,7 @@ const AddDebt = () => {
                 classNameIcon="bi bi-save"
                 isLoading={ isLoading }
                 onClick={ handleSaveDebts }
-                disabled={ listDebts.length === 0 }
+                disabled={ listDebts.length === 0 || debtor === '' }
               >
                 Guardar
               </SecondaryButton>
