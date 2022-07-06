@@ -3,6 +3,7 @@ import { useState } from 'react'
 
 import PrimaryButton from '../buttons/PrimaryButton'
 import ComponentGrouper from '../common/ComponentGrouper'
+import useInitialOperations from '../../hooks/useInitialOperations'
 
 export const openModalCreateAdmin = () => {
   const modalTecnologico = new Modal(
@@ -16,11 +17,25 @@ export const openModalCreateAdmin = () => {
 
 const ModalCreateAdmin = () => {
   const [isLoading, setIsLoading] = useState()
+  const { insertAdmin } = useInitialOperations()
 
   const handleCreateAdmin = (evt) => {
     evt.preventDefault()
 
     setIsLoading(true)
+    insertAdmin({
+      name: evt.target[0].value,
+      lastName: evt.target[1].value,
+      motherLastName: evt.target[2].value,
+      username: evt.target[3].value,
+      password: evt.target[4].value
+    }).then((res) => {
+      setIsLoading(false)
+      if (res) {
+        const myModal = Modal.getInstance(document.getElementById('ModalCreateAdmin'))
+        myModal.hide()
+      }
+    })
   }
 
   return (
