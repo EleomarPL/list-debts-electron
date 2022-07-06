@@ -8,6 +8,7 @@ const { triggerEventsInitital } = require('./evtContextBridge/inititalOperation'
 const { triggerEventsLogin } = require('./evtContextBridge/loginOperation')
 const { triggerEventsDebtor } = require('./evtContextBridge/debtorOperation')
 const { triggerEventsUser } = require('./evtContextBridge/userOperation')
+const { triggerEventsDebt } = require('./evtContextBridge/debtOperation')
 
 function createWindow () {
   const createMainWindow = new BrowserWindow({
@@ -28,6 +29,7 @@ function createWindow () {
   triggerEventsLogin()
   triggerEventsDebtor()
   triggerEventsUser()
+  triggerEventsDebt()
 }
 
 app.whenReady().then(createWindow)

@@ -16,22 +16,26 @@ const debtSchema = new Schema({
   total: {
     type: Double
   },
-  idDebtor: [{
+  idDebtor: {
     type: Schema.Types.ObjectId,
     ref: 'Debtor'
-  }],
-  idUser: [{
+  },
+  idUser: {
     type: Schema.Types.ObjectId,
     ref: 'User'
-  }],
+  },
   date: Date
-})
+}, { minimize: false })
 
 debtSchema.set('toJSON', {
   transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id
+    returnedObject.id = returnedObject._id.toString()
+    returnedObject.idDebtor = returnedObject.idDebtor.toString()
+    returnedObject.idUser = returnedObject.idUser.toString()
     delete returnedObject._id
     delete returnedObject.__v
+
+    return returnedObject
   }
 })
 

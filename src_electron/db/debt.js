@@ -1,5 +1,5 @@
 const Debt = require('../models/Debt')
-const Registerpay = require('../models/Registerpay')
+const Registerpay = require('../models/RegisterPay')
 const handleErrors = require('../utils/handleErrors')
 
 const insertDebt = async ({
@@ -20,7 +20,7 @@ const insertDebt = async ({
     })
 
     const savedDebt = await newDebt.save()
-    return savedDebt
+    return savedDebt.toJSON()
   } catch (error) {
     return handleErrors({ error })
   }
