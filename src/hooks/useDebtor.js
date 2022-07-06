@@ -31,9 +31,27 @@ const useDebtor = () => {
 
     return result
   }
+  const updateDebtor = async ({ idDebtor, address }) => {
+    const result = await window.electron.invoke(
+      'debtor:updateDebtor',
+      { token, address, idDebtor }
+    )
+    if (!result) {
+      notifyInfo('Error al modificar deudor')
+      return false
+    }
+    if (result.error) {
+      notifyError('Error interno')
+      return false
+    }
+
+    notifySuccess('Deudor modificado')
+
+    return result
+  }
 
   return {
-    insertDebtor, getDebtors
+    insertDebtor, getDebtors, updateDebtor
   }
 }
 

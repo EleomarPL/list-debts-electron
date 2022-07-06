@@ -1,6 +1,9 @@
 import { Modal } from 'bootstrap'
 import PropTypes from 'prop-types'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+
+import PrimaryButton from '../buttons/PrimaryButton'
+import useDebtor from '../../hooks/useDebtor'
 
 export const openModalModifyDebtor = () => {
   const modalTecnologico = new Modal(
@@ -13,7 +16,27 @@ export const openModalModifyDebtor = () => {
 }
 
 const ModalModifyDebtor = ({ idDebtor, address }) => {
+  const [isLoading, setIsLoading] = useState(false)
   const inputAddressRef = useRef({})
+
+  const { updateDebtor } = useDebtor()
+
+  const handleModifyDebtor = (evt) => {
+    evt.preventDefault()
+
+    setIsLoading(true)
+
+    updateDebtor({
+      idDebtor,
+      address: evt.target[0].value
+    }).then(res => {
+      setIsLoading(false)
+      if (res) {
+        const myModal = Modal.getInstance(document.getElementById('ModalModifyDebtor'))
+        myModal.hide()
+      }
+    })
+  }
 
   useEffect(() => {
     inputAddressRef.current.value = address
@@ -33,7 +56,7 @@ const ModalModifyDebtor = ({ idDebtor, address }) => {
             >
             </button>
           </div>
-          <form className="modal-body" onSubmit={ () => {} }>
+          <form className="modal-body" onSubmit={ handleModifyDebtor }>
             <div className="input-group mb-3">
               <label className="input-group-text" htmlFor="address">Dirección</label>
               <textarea className="form-control"
@@ -41,6 +64,13 @@ const ModalModifyDebtor = ({ idDebtor, address }) => {
                 ref={ inputAddressRef }
               />
             </div>
+            <PrimaryButton
+              className="w-100"
+              isLoading={ isLoading }
+              classNameIcon="bi bi-pencil-fill"
+            >
+              Modificar
+            </PrimaryButton>
           </form>
         </div>
       </div>
