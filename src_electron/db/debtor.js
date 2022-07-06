@@ -3,7 +3,7 @@ const handleErrors = require('../utils/handleErrors')
 
 const getDebtors = async () => {
   try {
-    const getDebtors = await Debtor.find({})
+    const getDebtors = await Debtor.find({}, {}, { sort: { date: -1 } })
     return getDebtors.map(debtor => debtor.toJSON())
   } catch (error) {
     return handleErrors({ error })
