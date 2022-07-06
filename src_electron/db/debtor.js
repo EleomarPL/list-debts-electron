@@ -1,6 +1,14 @@
 const Debtor = require('../models/Debtor')
 const handleErrors = require('../utils/handleErrors')
 
+const getDebtors = async () => {
+  try {
+    const getDebtors = await Debtor.find({})
+    return getDebtors.map(debtor => debtor.toJSON())
+  } catch (error) {
+    return handleErrors({ error })
+  }
+}
 const insertDebtor = async ({
   idUser, name, lastName, motherLastName, address
 }) => {
@@ -19,11 +27,7 @@ const insertDebtor = async ({
     })
 
     const savedDebtor = await newDebtor.save()
-    return {
-      ...savedDebtor._doc,
-      id: savedDebtor._id.toString(),
-      idUser: null
-    }
+    return savedDebtor.toJSON()
   } catch (error) {
     return handleErrors({ error })
   }
@@ -54,5 +58,6 @@ const updateDebtor = async ({
 
 module.exports = {
   insertDebtor,
-  updateDebtor
+  updateDebtor,
+  getDebtors
 }

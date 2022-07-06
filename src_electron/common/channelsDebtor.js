@@ -1,3 +1,4 @@
 module.exports = [
-  'debtor:insertDebtor', 'debtor:updateDebtor'
+  'debtor:insertDebtor', 'debtor:updateDebtor',
+  'debtor:getDebtors'
 ]
