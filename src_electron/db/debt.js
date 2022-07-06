@@ -2,6 +2,10 @@ const Debt = require('../models/Debt')
 const Registerpay = require('../models/RegisterPay')
 const handleErrors = require('../utils/handleErrors')
 
+const getDebtsByDebtor = async ({ idDebtor }) => {
+  const debts = await Debt.find({ idDebtor }, {}, { sort: { date: -1 } })
+  return debts.map(debt => debt.toJSON())
+}
 const insertDebt = async ({
   idDebtor, idUser, article, description, total
 }) => {
@@ -59,5 +63,6 @@ const payDebt = async ({
 
 module.exports = {
   insertDebt,
-  payDebt
+  payDebt,
+  getDebtsByDebtor
 }

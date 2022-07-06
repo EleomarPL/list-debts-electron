@@ -1,6 +1,6 @@
 const { ipcMain } = require('electron')
 
-const { insertDebt } = require('../db/debt')
+const { insertDebt, getDebtsByDebtor } = require('../db/debt')
 const { stractorToken } = require('../middlewares/stractortoken')
 
 const triggerEventsDebt = () => {
@@ -20,6 +20,9 @@ const triggerEventsDebt = () => {
       })
     )
     return debts
+  })
+  ipcMain.handle('debt:getDebtByDebtor', async (_, { idDebtor }) => {
+    return await getDebtsByDebtor({ idDebtor })
   })
 }
 
