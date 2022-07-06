@@ -50,7 +50,7 @@ const updateDebtor = async ({
     }
 
     const savedChangeDebtor = await Debtor.findByIdAndUpdate(idDebtor, editDebtor, { new: true })
-    return savedChangeDebtor
+    return savedChangeDebtor.toJSON()
   } catch (error) {
     return handleErrors({ error })
   }

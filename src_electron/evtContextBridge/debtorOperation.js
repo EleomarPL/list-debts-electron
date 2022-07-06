@@ -1,6 +1,6 @@
 const { ipcMain } = require('electron')
 
-const { insertDebtor, getDebtors } = require('../db/debtor')
+const { insertDebtor, getDebtors, updateDebtor } = require('../db/debtor')
 const { filterAdmin } = require('../middlewares/stractortoken')
 
 const triggerEventsDebtor = () => {
@@ -16,6 +16,14 @@ const triggerEventsDebtor = () => {
 
     return await insertDebtor({
       idUser, name, lastName, motherLastName, address
+    })
+  })
+  ipcMain.handle('debtor:updateDebtor', async (_, { token, idDebtor, address }) => {
+    const idUser = filterAdmin({ token })
+    if (!idUser) return false
+
+    return await updateDebtor({
+      address, idUser, idDebtor
     })
   })
 }
