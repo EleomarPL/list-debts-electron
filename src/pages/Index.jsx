@@ -5,11 +5,13 @@ import PrimaryButton from '../components/buttons/PrimaryButton'
 import PersonalizedInput from '../components/common/PersonalizedInput'
 import ModalCreateAdmin from '../components/modals/ModalCreateAdmin'
 import useInitialOperations from '../hooks/useInitialOperations'
+import useLogin from '../hooks/useLogin'
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(false)
 
   const { isThereAdmin } = useInitialOperations()
+  const { login } = useLogin()
 
   useEffect(() => {
     isThereAdmin()
@@ -19,6 +21,11 @@ const Index = () => {
     evt.preventDefault()
 
     setIsLoading(true)
+    login({
+      username: evt.target[0].value,
+      password: evt.target[1].value,
+      callback: () => setIsLoading(false)
+    })
   }
 
   return (
