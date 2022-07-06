@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import PrimaryButton from '../buttons/PrimaryButton'
@@ -6,6 +6,7 @@ import ModifyButton from '../buttons/ModifyButton'
 import TitlePage from '../common/TitlePage'
 import ModalModifyDebtor, { openModalModifyDebtor } from '../modals/ModalModifyDebtor'
 import PersonalizedTable from '../common/PersonalizedTable'
+import useDebtor from '../../hooks/useDebtor'
 
 const AddDebtor = () => {
   const [listDebtors, setListDebtors] = useState([])
@@ -14,13 +15,24 @@ const AddDebtor = () => {
     idDebtor: 0,
     address: ''
   })
+  const formRef = useRef({})
 
   const user = useSelector(state => state.session.value)
+  const { insertDebtor } = useDebtor()
 
   const handleAddDebtor = (evt) => {
     evt.preventDefault()
 
     setIsLoading(true)
+    insertDebtor({
+      name: evt.target[0].value,
+      lastName: evt.target[1].value,
+      motherLastName: evt.target[2].value,
+      address: evt.target[3].value
+    }).then(res => {
+      setIsLoading(false)
+      if (res) formRef.current.reset()
+    })
   }
 
   const handleOpenModal = ({ idDebtor, address }) => {
@@ -35,7 +47,9 @@ const AddDebtor = () => {
       <TitlePage>Agregar Deudor</TitlePage>
       <div className="row col-md-12">
         <section className="col-md-2">
-          <form className="w-100" onSubmit={ handleAddDebtor }>
+          <form className="w-100" onSubmit={ handleAddDebtor }
+            ref={ formRef }
+          >
             <div className="mb-3">
               <label htmlFor="name" className="form-label">Nombre</label>
               <input type="text" className="form-control"
