@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 
 import PrimaryButton from '../buttons/PrimaryButton'
 import useDebtor from '../../hooks/useDebtor'
+import { updateArray } from '../../utils/updateArray'
 
 export const openModalModifyDebtor = () => {
   const modalTecnologico = new Modal(
@@ -15,7 +16,7 @@ export const openModalModifyDebtor = () => {
   modalTecnologico.show()
 }
 
-const ModalModifyDebtor = ({ idDebtor, address }) => {
+const ModalModifyDebtor = ({ idDebtor, address, listDebtors, setListDebtors }) => {
   const [isLoading, setIsLoading] = useState(false)
   const inputAddressRef = useRef({})
 
@@ -32,6 +33,12 @@ const ModalModifyDebtor = ({ idDebtor, address }) => {
     }).then(res => {
       setIsLoading(false)
       if (res) {
+        const newArray = updateArray({
+          array: listDebtors,
+          id: res.id,
+          newData: res
+        })
+        setListDebtors(newArray)
         const myModal = Modal.getInstance(document.getElementById('ModalModifyDebtor'))
         myModal.hide()
       }
@@ -80,7 +87,9 @@ const ModalModifyDebtor = ({ idDebtor, address }) => {
 
 ModalModifyDebtor.propTypes = {
   idDebtor: PropTypes.string.isRequired,
-  address: PropTypes.string.isRequired
+  address: PropTypes.string.isRequired,
+  listDebtors: PropTypes.array.isRequired,
+  setListDebtors: PropTypes.func.isRequired
 }
 
 export default ModalModifyDebtor

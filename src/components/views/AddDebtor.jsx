@@ -37,7 +37,10 @@ const AddDebtor = () => {
       address: evt.target[3].value
     }).then(res => {
       setIsLoading(false)
-      if (res) formRef.current.reset()
+      if (res) {
+        formRef.current.reset()
+        setListDebtors([res, ...listDebtors])
+      }
     })
   }
 
@@ -124,6 +127,8 @@ const AddDebtor = () => {
       <ModalModifyDebtor
         idDebtor={ dataModal.idDebtor }
         address={ dataModal.address }
+        listDebtors={ listDebtors }
+        setListDebtors={ setListDebtors }
       />
     </>
   )
