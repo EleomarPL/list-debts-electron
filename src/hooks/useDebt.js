@@ -22,9 +22,22 @@ const useDebt = () => {
     }
     return resultGetDebtByDebtor.map(debtor => ({ ...debtor, box: true }))
   }
+  const payDebts = async ({ listDebts }) => {
+    const filterDebtsToPay = listDebts.filter(item => item.box)
+    const resultPayDebt = await window.electron.invoke(
+      'debt:payDebt',
+      { token, listDebts: filterDebtsToPay }
+    )
+    if (!resultPayDebt) {
+      notifyError('Error al pagar deuda')
+      return false
+    }
+
+    return resultPayDebt
+  }
 
   return {
-    addDebts, getDebtByDebtor
+    addDebts, getDebtByDebtor, payDebts
   }
 }
 

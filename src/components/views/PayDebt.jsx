@@ -14,7 +14,7 @@ const PayDebt = () => {
   const [exChange, setExChange] = useState('')
   const [pay, setPay] = useState('')
 
-  const { getDebtByDebtor } = useDebt()
+  const { getDebtByDebtor, payDebts } = useDebt()
 
   useEffect(() => {
     if (debtor !== '') {
@@ -55,6 +55,14 @@ const PayDebt = () => {
     evt.preventDefault()
 
     setIsLoading(true)
+    payDebts({
+      listDebts
+    }).then(res => {
+      setIsLoading(false)
+      if (res) {
+        setListDebts(listDebts.filter(debt => !debt.box))
+      }
+    })
   }
 
   return (
