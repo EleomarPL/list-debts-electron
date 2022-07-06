@@ -19,7 +19,11 @@ const insertDebtor = async ({
     })
 
     const savedDebtor = await newDebtor.save()
-    return savedDebtor
+    return {
+      ...savedDebtor._doc,
+      id: savedDebtor._id.toString(),
+      idUser: null
+    }
   } catch (error) {
     return handleErrors({ error })
   }
