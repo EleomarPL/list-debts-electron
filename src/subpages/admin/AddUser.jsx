@@ -1,17 +1,40 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import PrimaryButton from '../../components/buttons/PrimaryButton'
 import PersonalizedTable from '../../components/common/PersonalizedTable'
 import TitlePage from '../../components/common/TitlePage'
+import useUser from '../../hooks/useUser'
 
 const AddUser = () => {
   const [listUsers, setListUsers] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const formRef = useRef({})
+
+  const { getUsers, insertUser } = useUser()
+
+  useEffect(() => {
+    getUsers().then(res => {
+      if (res) setListUsers(res)
+    })
+  }, [])
 
   const handleAddUser = (evt) => {
     evt.preventDefault()
 
     setIsLoading(true)
+    insertUser({
+      name: evt.target[0].value,
+      lastName: evt.target[1].value,
+      motherLastName: evt.target[2].value,
+      username: evt.target[3].value,
+      password: evt.target[4].value
+    }).then(res => {
+      setIsLoading(false)
+      if (res) {
+        formRef.current.reset()
+        setListUsers([res, ...listUsers])
+      }
+    })
   }
 
   return (
@@ -19,7 +42,9 @@ const AddUser = () => {
       <TitlePage>Agregar Usuario</TitlePage>
       <div className="row col-md-12">
         <section className="col-md-2">
-          <form className="w-100" onSubmit={ handleAddUser }>
+          <form className="w-100" onSubmit={ handleAddUser }
+            ref={ formRef }
+          >
             <div className="mb-3">
               <label htmlFor="name" className="form-label">Nombre</label>
               <input type="text" className="form-control"

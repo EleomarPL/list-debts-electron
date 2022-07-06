@@ -4,7 +4,7 @@ import Icon from '../common/Icon'
 const ModifyButton = ({ onClick }) => {
   return (
     <button type="button"
-      className="btn btn-secondary"
+      className="btn btn-secondary w-100"
       onClick={ onClick }
     >
       <Icon className="bi bi-pencil" />
