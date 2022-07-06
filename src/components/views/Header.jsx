@@ -4,12 +4,13 @@ import PropTypes from 'prop-types'
 
 import Icon from '../common/Icon'
 import SwitchColor from './SwitchColor'
+import DropdownMenuUser from './DropdownMenuUser'
 
 const Header = ({ listNavbar }) => {
   return (
     <Nav className="navbar navbar-expand-lg sticky-top">
       <div className="container-fluid">
-        <NormalLink className="navbar-brand" to="/">
+        <NormalLink className="navbar-brand" to="">
           Tablero de operaciones
         </NormalLink>
         <button className="navbar-toggler" type="button"
@@ -35,6 +36,9 @@ const Header = ({ listNavbar }) => {
             }
           </ul>
           <ul className="navbar-nav mr-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+              <DropdownMenuUser />
+            </li>
             <li className="nav-item">
               <SwitchColor />
             </li>

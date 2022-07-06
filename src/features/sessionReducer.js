@@ -8,6 +8,7 @@ export const sessionSlice = createSlice({
   },
   reducers: {
     logout: state => {
+      window.localStorage.clear()
       state.value = {}
     },
     login: (state, action) => {
