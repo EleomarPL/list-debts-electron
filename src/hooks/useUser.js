@@ -33,11 +33,11 @@ const useUser = () => {
   }
   const updateUser = async ({ idUser, name, lastName, motherLastName, username, password }) => {
     const result = await window.electron.invoke(
-      'debtor:updateDebtor',
+      'user:update-user',
       { token, idUser, name, lastName, motherLastName, username, password }
     )
     if (!result) {
-      notifyInfo('Error al modificar deudor')
+      notifyInfo('Error al modificar usuario')
       return false
     }
     if (result.error) {
@@ -45,7 +45,7 @@ const useUser = () => {
       return false
     }
 
-    notifySuccess('Deudor modificado')
+    notifySuccess('Usuario modificado')
 
     return result
   }
