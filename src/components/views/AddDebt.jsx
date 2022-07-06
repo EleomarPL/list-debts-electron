@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import useDebt from '../../hooks/useDebt'
 import DeleteButton from '../buttons/DeleteButton'
 
 import PrimaryButton from '../buttons/PrimaryButton'
@@ -13,6 +14,7 @@ const AddDebt = () => {
   const [isLoading, setIsLoading] = useState(false)
 
   const formRef = useRef({})
+  const { addDebts } = useDebt()
 
   const handleAddPosibleDebt = (evt) => {
     evt.preventDefault()
@@ -27,6 +29,17 @@ const AddDebt = () => {
   }
   const handleSaveDebts = () => {
     setIsLoading(true)
+    addDebts({
+      idDebtor: debtor,
+      listDebts
+    }).then((res) => {
+      setIsLoading(false)
+      if (res) {
+        setListDebts([])
+        setDebtor('')
+        formRef.current.reset()
+      }
+    })
   }
   const handleDeleteArticle = (index) => {
     setListDebts(listDebts.filter((_, i) => i !== index))
