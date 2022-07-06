@@ -30,7 +30,7 @@ const userSchema = new Schema({
   },
   password: String,
   date: Date
-})
+}, { minimize: false })
 
 userSchema.set('toJSON', {
   transform: (document, returnedObject) => {
@@ -39,6 +39,8 @@ userSchema.set('toJSON', {
     delete returnedObject.__v
 
     delete returnedObject.password
+
+    return returnedObject
   }
 })
 
