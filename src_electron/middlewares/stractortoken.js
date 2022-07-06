@@ -36,5 +36,5 @@ const filterUser = ({ token }) => {
 }
 
 module.exports = {
-  filterAdmin, filterUser
+  filterAdmin, filterUser, stractorToken
 }
