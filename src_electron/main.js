@@ -1,10 +1,11 @@
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
 
-require('dotenv').config({ path: '../.env' })
+require('dotenv').config({ path: path.join(__dirname, '../.env') })
 require('./connection')
 
 const { triggerEventsInitital } = require('./evtContextBridge/inititalOperation')
+const { triggerEventsLogin } = require('./evtContextBridge/loginOperation')
 
 function createWindow () {
   const createMainWindow = new BrowserWindow({
@@ -22,6 +23,7 @@ function createWindow () {
   createMainWindow.maximize()
 
   triggerEventsInitital()
+  triggerEventsLogin()
 }
 
 app.whenReady().then(createWindow)

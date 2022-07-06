@@ -12,8 +12,8 @@ const login = async ({ username, password }) => {
   if (!(passwordUser && findUser)) return false
 
   const dataUserForToken = {
-    id: findUser._id,
-    userName: findUser.userName,
+    id: findUser._id.toString(),
+    userName: findUser.username,
     type: findUser.type
   }
 
@@ -23,7 +23,7 @@ const login = async ({ username, password }) => {
     type: findUser.type,
     lastName: findUser.lastName,
     motherLastName: findUser.motherLastName,
-    username: findUser.userName,
+    username: findUser.username,
     token
   }
 }
