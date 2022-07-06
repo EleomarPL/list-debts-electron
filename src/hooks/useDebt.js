@@ -14,9 +14,17 @@ const useDebt = () => {
     notifySuccess('Deuda agregada')
     return resultAddDebts
   }
+  const getDebtByDebtor = async ({ idDebtor }) => {
+    const resultGetDebtByDebtor = await window.electron.invoke('debt:getDebtByDebtor', { token, idDebtor })
+    if (!resultGetDebtByDebtor) {
+      notifyError('Error al obtener deuda')
+      return false
+    }
+    return resultGetDebtByDebtor.map(debtor => ({ ...debtor, box: true }))
+  }
 
   return {
-    addDebts
+    addDebts, getDebtByDebtor
   }
 }
 

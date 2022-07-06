@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import useDebt from '../../hooks/useDebt'
 import PrimaryButton from '../buttons/PrimaryButton'
 
 import PersonalizedTable from '../common/PersonalizedTable'
@@ -7,7 +8,35 @@ import InputSelectDebtor from './InputSelectDebtor'
 
 const PayDebt = () => {
   const [listDebts, setListDebts] = useState([])
+  const [debtor, setDebtor] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [total, seTotal] = useState('')
+  const [exChange, setExChange] = useState('')
+  const [pay, setPay] = useState('')
+
+  const { getDebtByDebtor } = useDebt()
+
+  useEffect(() => {
+    if (debtor !== '') {
+      getDebtByDebtor({ idDebtor: debtor }).then(res => {
+        if (res) setListDebts(res)
+      })
+    }
+  }, [debtor])
+  useEffect(() => {
+    seTotal(listDebts.reduce((total, debt) => {
+      if (debt.box) {
+        return total + debt.total
+      }
+      return total
+    }, 0))
+  }, [listDebts])
+  useEffect(() => {
+    if (listDebts.length === 0) setExChange(0)
+    else if (Number(pay) === 0) setExChange(0)
+    else if (Number(pay) < total) setExChange(0)
+    else setExChange(Number(pay) - total)
+  }, [pay])
 
   const handleChangeValueRadio = ({ id }) => {
     const indexValue = listDebts.findIndex(debt => debt.id === id)
@@ -31,7 +60,10 @@ const PayDebt = () => {
   return (
     <>
       <TitlePage>Pagar Deuda</TitlePage>
-      <InputSelectDebtor />
+      <InputSelectDebtor
+        debtor={ debtor }
+        setDebtor={ setDebtor }
+      />
       <div className="row col-md-12">
         <section className="col-md-8">
           <PersonalizedTable>
@@ -67,24 +99,28 @@ const PayDebt = () => {
             <span style={ { fontSize: '2.4rem' } }
               className="m-auto"
             >
-              Total: <strong>100.00</strong>
+              Total: <strong>{ total }</strong>
             </span>
             <div className="mb-3 w-100">
               <label htmlFor="pay" className="form-label">Pago</label>
               <input type="number" className="form-control"
                 id="pay" autoFocus={ true }
+                value={ pay }
+                onChange={ evt => setPay(evt.target.value) }
               />
             </div>
             <div className="mb-3 w-100">
               <label htmlFor="exchange" className="form-label">Cambio</label>
               <input type="number" className="form-control"
                 id="exchange" autoFocus={ true }
+                value={ exChange } disabled
               />
             </div>
             <PrimaryButton
               classNameIcon="bi bi-file-plus"
               className="w-100"
               isLoading={ isLoading }
+              disabled={ listDebts === 0 || total === 0 || Number(pay) < total }
             >
               Pagar
             </PrimaryButton>
