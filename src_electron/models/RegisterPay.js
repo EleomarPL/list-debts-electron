@@ -15,14 +15,14 @@ const registerpaySchema = new Schema({
   total: {
     type: Double
   },
-  idDebtor: [{
+  idDebtor: {
     type: Schema.Types.ObjectId,
     ref: 'Debtor'
-  }],
-  idUser: [{
+  },
+  idUser: {
     type: Schema.Types.ObjectId,
     ref: 'User'
-  }],
+  },
   date: Date
 })
 
