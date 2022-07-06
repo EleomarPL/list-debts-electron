@@ -79,7 +79,7 @@ const updateUser = async ({
   idUser, name, lastName, motherLastName, username, password
 }) => {
   try {
-    if (!(name && lastName && motherLastName && username && password)) {
+    if (!(name && lastName && motherLastName && username)) {
       throw new Error('allParametersRequired')
     }
 
@@ -88,9 +88,9 @@ const updateUser = async ({
       name,
       lastName,
       motherLastName,
-      username,
-      password: passwordHash
+      username
     }
+    if (password) editUser.password = passwordHash
 
     const savedCHangeUser = await User.findByIdAndUpdate(idUser, editUser, { new: true })
     return savedCHangeUser.toJSON()

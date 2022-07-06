@@ -4,7 +4,7 @@ import UserLayout from '../components/layouts/UserLayout'
 
 import AddDebt from '../components/views/AddDebt'
 import AddDebtor from '../components/views/AddDebtor'
-import PayDebt from './components/views/PayDebt'
+import PayDebt from '../components/views/PayDebt'
 
 const User = () => {
   return (
