@@ -13,6 +13,14 @@ const isThereAdmin = async () => {
     return handleErrors({ error })
   }
 }
+const getUsers = async () => {
+  try {
+    const users = await User.find({ type: 1 }, {}, { sort: { date: -1 } })
+    return users.map(user => user.toJSON())
+  } catch (error) {
+    return handleErrors({ error })
+  }
+}
 const initialInsertAdmin = async ({
   name, lastName, motherLastName, username, password
 }) => {
@@ -36,7 +44,7 @@ const initialInsertAdmin = async ({
     })
 
     const savedUser = await newAdmin.save()
-    return { ...savedUser._doc, password: null }
+    return savedUser.toJSON()
   } catch (error) {
     return handleErrors({ error })
   }
@@ -61,7 +69,7 @@ const insertNewUser = async ({
     })
 
     const savedUser = await newUser.save()
-    return savedUser
+    return savedUser.toJSON()
   } catch (error) {
     return handleErrors({ error })
   }
@@ -85,7 +93,7 @@ const updateUser = async ({
     }
 
     const savedCHangeUser = await User.findByIdAndUpdate(idUser, editUser, { new: true })
-    return savedCHangeUser
+    return savedCHangeUser.toJSON()
   } catch (error) {
     return handleErrors({ error })
   }
@@ -95,5 +103,6 @@ module.exports = {
   initialInsertAdmin,
   insertNewUser,
   updateUser,
-  isThereAdmin
+  isThereAdmin,
+  getUsers
 }
