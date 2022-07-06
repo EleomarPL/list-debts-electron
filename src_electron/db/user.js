@@ -36,7 +36,7 @@ const initialInsertAdmin = async ({
     })
 
     const savedUser = await newAdmin.save()
-    return savedUser
+    return { ...savedUser._doc, password: null }
   } catch (error) {
     return handleErrors({ error })
   }

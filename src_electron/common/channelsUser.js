@@ -1,3 +1,3 @@
 module.exports = [
-  'user:insertAdmin', 'user:insertUser', 'user:updateUser'
+  'user:insert-admin', 'user:insert-user', 'user:update-user'
 ]

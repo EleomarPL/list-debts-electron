@@ -13,10 +13,11 @@ const validChannels = [
 
 contextBridge.exposeInMainWorld(
   'electron', {
-    invoke: async (channel, data) => {
+    invoke: (channel, data) => {
       if (validChannels.includes(channel)) {
-        return await ipcRenderer.invoke(channel, data)
+        return ipcRenderer.invoke(channel, data)
       }
+      return false
     },
     removeAllListeners: (channel) => {
       if (validChannels.includes(channel)) {
