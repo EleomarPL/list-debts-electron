@@ -28,9 +28,13 @@ const registerpaySchema = new Schema({
 
 registerpaySchema.set('toJSON', {
   transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id
+    returnedObject.id = returnedObject._id.toString()
+    returnedObject.idUser = returnedObject.idUser.toString()
+    returnedObject.idDebtor = returnedObject.idDebtor.toString()
     delete returnedObject._id
     delete returnedObject.__v
+
+    return returnedObject
   }
 })
 

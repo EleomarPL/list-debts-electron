@@ -5,10 +5,11 @@ const channelsDebtor = require('./common/channelsDebtor')
 const channelsDebt = require('./common/channelsDebt')
 const channelsLogin = require('./common/channelsLogin')
 const channelsInitial = require('./common/channelsInitial')
+const channelsRegisterPay = require('./common/channelsRegisterPay')
 
 const validChannels = [
   ...channelsUser, ...channelsDebtor, ...channelsDebt,
-  ...channelsLogin, ...channelsInitial
+  ...channelsLogin, ...channelsInitial, ...channelsRegisterPay
 ]
 
 contextBridge.exposeInMainWorld(
