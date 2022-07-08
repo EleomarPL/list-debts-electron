@@ -6,6 +6,7 @@ import TitlePage from '../../components/common/TitlePage'
 import useUser from '../../hooks/useUser'
 import ModalModifyUser, { openModalModifyUser } from '../../components/modals/ModalModifyUser'
 import ModifyButton from '../../components/buttons/ModifyButton'
+import useValidationUser from '../../hooks/validations/useValidationUser'
 
 const AddUser = () => {
   const [listUsers, setListUsers] = useState([])
@@ -14,6 +15,7 @@ const AddUser = () => {
   const formRef = useRef({})
 
   const { getUsers, insertUser } = useUser()
+  const { validateCreateUser } = useValidationUser()
 
   useEffect(() => {
     getUsers().then(res => {
@@ -24,20 +26,22 @@ const AddUser = () => {
   const handleAddUser = (evt) => {
     evt.preventDefault()
 
-    setIsLoading(true)
-    insertUser({
-      name: evt.target[0].value,
-      lastName: evt.target[1].value,
-      motherLastName: evt.target[2].value,
-      username: evt.target[3].value,
-      password: evt.target[4].value
-    }).then(res => {
-      setIsLoading(false)
-      if (res) {
-        formRef.current.reset()
-        setListUsers([res, ...listUsers])
-      }
-    })
+    if (validateCreateUser({ evt })) {
+      setIsLoading(true)
+      insertUser({
+        name: evt.target[0].value,
+        lastName: evt.target[1].value,
+        motherLastName: evt.target[2].value,
+        username: evt.target[3].value,
+        password: evt.target[4].value
+      }).then(res => {
+        setIsLoading(false)
+        if (res) {
+          formRef.current.reset()
+          setListUsers([res, ...listUsers])
+        }
+      })
+    }
   }
   const handleOpenModal = (user) => {
     setDataUser(user)

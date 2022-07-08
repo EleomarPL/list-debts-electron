@@ -4,8 +4,9 @@ import { useEffect, useRef, useState } from 'react'
 
 import PrimaryButton from '../buttons/PrimaryButton'
 import ComponentGrouper from '../common/ComponentGrouper'
-import useUser from '../../hooks/useUser'
 import { updateArray } from '../../utils/updateArray'
+import useUser from '../../hooks/useUser'
+import useValidationUser from '../../hooks/validations/useValidationUser'
 
 export const openModalModifyUser = () => {
   const modalTecnologico = new Modal(
@@ -25,7 +26,9 @@ const ModalModifyUser = ({ dataUser, listUsers, setListUsers }) => {
   const inputLastNameRef = useRef({})
   const inputMotherLastNameRef = useRef({})
   const inputUsernameRef = useRef({})
+
   const { updateUser } = useUser()
+  const { validateUpdateUser } = useValidationUser()
 
   useEffect(() => {
     inputNameRef.current.value = dataUser.name
@@ -37,28 +40,30 @@ const ModalModifyUser = ({ dataUser, listUsers, setListUsers }) => {
   const handleModifyUser = (evt) => {
     evt.preventDefault()
 
-    setIsLoading(true)
-    updateUser({
-      name: inputNameRef.current.value,
-      lastName: inputLastNameRef.current.value,
-      motherLastName: inputMotherLastNameRef.current.value,
-      username: inputUsernameRef.current.value,
-      password: evt.target[5]?.value,
-      idUser: dataUser.id
-    }).then(res => {
-      setIsLoading(false)
-      if (res) {
-        const newArray = updateArray({
-          array: listUsers,
-          id: res.id,
-          newData: res
-        })
-        setListUsers(newArray)
+    if (validateUpdateUser({ evt })) {
+      setIsLoading(true)
+      updateUser({
+        name: inputNameRef.current.value,
+        lastName: inputLastNameRef.current.value,
+        motherLastName: inputMotherLastNameRef.current.value,
+        username: inputUsernameRef.current.value,
+        password: evt.target[5]?.value,
+        idUser: dataUser.id
+      }).then(res => {
+        setIsLoading(false)
+        if (res) {
+          const newArray = updateArray({
+            array: listUsers,
+            id: res.id,
+            newData: res
+          })
+          setListUsers(newArray)
 
-        const myModal = Modal.getInstance(document.getElementById('ModalModifyUser'))
-        myModal.hide()
-      }
-    })
+          const myModal = Modal.getInstance(document.getElementById('ModalModifyUser'))
+          myModal.hide()
+        }
+      })
+    }
   }
 
   return (
