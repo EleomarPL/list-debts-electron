@@ -26,7 +26,6 @@ const AddDebt = () => {
         description: evt.target[1].value,
         total: evt.target[2].value
       }])
-      setDebtor('')
       formRef.current.reset()
     }
   }
