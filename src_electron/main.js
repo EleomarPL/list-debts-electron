@@ -1,5 +1,7 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, Menu } = require('electron')
 const path = require('path')
+
+Menu.setApplicationMenu(null)
 
 require('dotenv').config({ path: path.join(__dirname, '../.env') })
 require('./connection')
