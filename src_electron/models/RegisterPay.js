@@ -1,5 +1,5 @@
-const { Schema, model } = require('mongoose')
-const Double = require('@mongoosejs/double')
+const mongoose = require('mongoose')
+const { Schema, model } = mongoose
 
 const registerpaySchema = new Schema({
   article: {
@@ -13,7 +13,7 @@ const registerpaySchema = new Schema({
     maxlength: 150
   },
   total: {
-    type: Double
+    type: mongoose.Decimal128
   },
   idDebtor: {
     type: Schema.Types.ObjectId,
@@ -31,6 +31,7 @@ registerpaySchema.set('toJSON', {
     returnedObject.id = returnedObject._id.toString()
     returnedObject.idUser = returnedObject.idUser.toString()
     returnedObject.idDebtor = returnedObject.idDebtor.toString()
+    returnedObject.total = Number(returnedObject.total.toString())
     delete returnedObject._id
     delete returnedObject.__v
 

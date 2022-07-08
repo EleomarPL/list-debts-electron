@@ -74,7 +74,7 @@ const AddDebt = () => {
               </div>
               <div className="mb-3 w-100">
                 <label htmlFor="total" className="form-label">Total</label>
-                <input type="number" className="form-control"
+                <input type="text" className="form-control"
                   id="total" autoFocus={ true }
                 />
               </div>

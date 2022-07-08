@@ -1,6 +1,6 @@
-const { Schema, model } = require('mongoose')
+const mongoose = require('mongoose')
+const { Schema, model } = mongoose
 const uniqueValidator = require('mongoose-unique-validator')
-const Double = require('@mongoosejs/double')
 
 const debtSchema = new Schema({
   article: {
@@ -14,7 +14,7 @@ const debtSchema = new Schema({
     maxlength: 150
   },
   total: {
-    type: Double
+    type: mongoose.Decimal128
   },
   idDebtor: {
     type: Schema.Types.ObjectId,
@@ -32,6 +32,7 @@ debtSchema.set('toJSON', {
     returnedObject.id = returnedObject._id.toString()
     returnedObject.idDebtor = returnedObject.idDebtor.toString()
     returnedObject.idUser = returnedObject.idUser.toString()
+    returnedObject.total = Number(returnedObject.total.toString())
     delete returnedObject._id
     delete returnedObject.__v
 
