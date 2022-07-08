@@ -3,13 +3,13 @@ import { Helmet } from 'react-helmet'
 import { Suspense, lazy } from 'react'
 
 import AdminLayout from '../components/layouts/AdminLayout'
+import SpinnerLoadingPage from '../components/common/SpinnerLoadingPage'
 
 const AddDebt = lazy(() => import('../components/views/AddDebt'))
 const AddDebtor = lazy(() => import('../components/views/AddDebtor'))
 const AddUser = lazy(() => import('../subpages/admin/AddUser'))
 const PayDebt = lazy(() => import('../components/views/PayDebt'))
 const ShowPays = lazy(() => import('../subpages/admin/ShowPays'))
-const SpinnerLoadingPage = lazy(() => import('../components/common/SpinnerLoadingPage'))
 
 const Admin = () => {
   return (

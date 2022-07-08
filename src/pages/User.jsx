@@ -3,11 +3,11 @@ import { Routes, Route } from 'react-router-dom'
 import { Suspense, lazy } from 'react'
 
 import UserLayout from '../components/layouts/UserLayout'
+import SpinnerLoadingPage from '../components/common/SpinnerLoadingPage'
 
 const AddDebt = lazy(() => import('../components/views/AddDebt'))
 const AddDebtor = lazy(() => import('../components/views/AddDebtor'))
 const PayDebt = lazy(() => import('../components/views/PayDebt'))
-const SpinnerLoadingPage = lazy(() => import('../components/common/SpinnerLoadingPage'))
 
 const User = () => {
   return (
