@@ -6,12 +6,14 @@ import PersonalizedInput from '../components/common/PersonalizedInput'
 import ModalCreateAdmin from '../components/modals/ModalCreateAdmin'
 import useInitialOperations from '../hooks/useInitialOperations'
 import useLogin from '../hooks/useLogin'
+import useValidationLogin from '../hooks/validations/useValidationLogin'
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(false)
 
   const { isThereAdmin } = useInitialOperations()
   const { login } = useLogin()
+  const { validateLogin } = useValidationLogin()
 
   useEffect(() => {
     isThereAdmin()
@@ -20,12 +22,14 @@ const Index = () => {
   const handleLogin = (evt) => {
     evt.preventDefault()
 
-    setIsLoading(true)
-    login({
-      username: evt.target[0].value,
-      password: evt.target[1].value,
-      callback: () => setIsLoading(false)
-    })
+    if (validateLogin({ evt })) {
+      setIsLoading(true)
+      login({
+        username: evt.target[0].value,
+        password: evt.target[1].value,
+        callback: () => setIsLoading(false)
+      })
+    }
   }
 
   return (
