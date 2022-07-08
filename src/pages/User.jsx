@@ -1,11 +1,13 @@
 import { Helmet } from 'react-helmet'
 import { Routes, Route } from 'react-router-dom'
+import { Suspense, lazy } from 'react'
 
 import UserLayout from '../components/layouts/UserLayout'
 
-import AddDebt from '../components/views/AddDebt'
-import AddDebtor from '../components/views/AddDebtor'
-import PayDebt from '../components/views/PayDebt'
+const AddDebt = lazy(() => import('../components/views/AddDebt'))
+const AddDebtor = lazy(() => import('../components/views/AddDebtor'))
+const PayDebt = lazy(() => import('../components/views/PayDebt'))
+const SpinnerLoadingPage = lazy(() => import('../components/common/SpinnerLoadingPage'))
 
 const User = () => {
   return (
@@ -17,7 +19,9 @@ const User = () => {
               <Helmet>
                 <title>Pagar Deuda</title>
               </Helmet>
-              <PayDebt />
+              <Suspense fallback={ <SpinnerLoadingPage /> }>
+                <PayDebt />
+              </Suspense>
             </>
           }
         />
@@ -27,7 +31,9 @@ const User = () => {
               <Helmet>
                 <title>Agregar Deudor</title>
               </Helmet>
-              <AddDebtor />
+              <Suspense fallback={ <SpinnerLoadingPage /> }>
+                <AddDebtor />
+              </Suspense>
             </>
           }
         />
@@ -37,7 +43,9 @@ const User = () => {
               <Helmet>
                 <title>Agregar Deuda</title>
               </Helmet>
-              <AddDebt />
+              <Suspense fallback={ <SpinnerLoadingPage /> }>
+                <AddDebt />
+              </Suspense>
             </>
           }
         />

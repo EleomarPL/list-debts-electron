@@ -1,13 +1,15 @@
 import { Routes, Route } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
+import { Suspense, lazy } from 'react'
 
 import AdminLayout from '../components/layouts/AdminLayout'
 
-import AddDebt from '../components/views/AddDebt'
-import AddDebtor from '../components/views/AddDebtor'
-import AddUser from '../subpages/admin/AddUser'
-import PayDebt from '../components/views/PayDebt'
-import ShowPays from '../subpages/admin/ShowPays'
+const AddDebt = lazy(() => import('../components/views/AddDebt'))
+const AddDebtor = lazy(() => import('../components/views/AddDebtor'))
+const AddUser = lazy(() => import('../subpages/admin/AddUser'))
+const PayDebt = lazy(() => import('../components/views/PayDebt'))
+const ShowPays = lazy(() => import('../subpages/admin/ShowPays'))
+const SpinnerLoadingPage = lazy(() => import('../components/common/SpinnerLoadingPage'))
 
 const Admin = () => {
   return (
@@ -19,7 +21,9 @@ const Admin = () => {
               <Helmet>
                 <title>Pagar Deuda</title>
               </Helmet>
-              <PayDebt />
+              <Suspense fallback={ <SpinnerLoadingPage /> }>
+                <PayDebt />
+              </Suspense>
             </>
           }
         />
@@ -29,7 +33,9 @@ const Admin = () => {
               <Helmet>
                 <title>Agregar Deudor</title>
               </Helmet>
-              <AddDebtor />
+              <Suspense fallback={ <SpinnerLoadingPage /> }>
+                <AddDebtor />
+              </Suspense>
             </>
           }
         />
@@ -39,7 +45,9 @@ const Admin = () => {
               <Helmet>
                 <title>Agregar Deuda</title>
               </Helmet>
-              <AddDebt />
+              <Suspense fallback={ <SpinnerLoadingPage /> }>
+                <AddDebt />
+              </Suspense>
             </>
           }
         />
@@ -49,7 +57,9 @@ const Admin = () => {
               <Helmet>
                 <title>Mostrar Pagos de Deudas</title>
               </Helmet>
-              <ShowPays />
+              <Suspense fallback={ <SpinnerLoadingPage /> }>
+                <ShowPays />
+              </Suspense>
             </>
           }
         />
@@ -59,7 +69,9 @@ const Admin = () => {
               <Helmet>
                 <title>Agregar Usuario</title>
               </Helmet>
-              <AddUser />
+              <Suspense fallback={ <SpinnerLoadingPage /> }>
+                <AddUser />
+              </Suspense>
             </>
           }
         />
