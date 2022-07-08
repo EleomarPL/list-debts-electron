@@ -10,6 +10,7 @@ lerna-debug.log*
 .env
 node_modules
 dist
+src_electron/app
 dist-ssr
 *.local
 

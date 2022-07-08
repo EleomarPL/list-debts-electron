@@ -22,7 +22,7 @@ function createWindow () {
     }
   })
 
-  // createMainWindow.loadFile('index.html')
+  // createMainWindow.loadFile(path.join(__dirname, 'app', 'index.html'))
   createMainWindow.loadURL('http://localhost:3000')
   createMainWindow.maximize()
 
