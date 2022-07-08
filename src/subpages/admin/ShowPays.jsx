@@ -33,6 +33,7 @@ const ShowPays = () => {
             <th>Descripcion</th>
             <th>Deudor</th>
             <th>Total</th>
+            <th>Fecha</th>
           </tr>
         </thead>
         <tbody>
@@ -43,6 +44,7 @@ const ShowPays = () => {
                 <td>{ pay.description }</td>
                 <td>{ `${pay?.idDebtor?.name} ${pay?.idDebtor?.lastName}` }</td>
                 <td>{ pay.total }</td>
+                <td>{ pay.date }</td>
               </tr>
             ))
           }

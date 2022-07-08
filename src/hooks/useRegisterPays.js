@@ -14,7 +14,10 @@ const useRegisterPays = () => {
       return false
     }
 
-    return registerPays
+    return registerPays.map(registerPay => ({
+      ...registerPay,
+      date: new Date(registerPay.date).toISOString().split('T').join(' ')
+    }))
   }
 
   return {
