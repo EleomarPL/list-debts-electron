@@ -1,6 +1,7 @@
 import { Suspense, lazy } from 'react'
 import { ToastContainer } from 'react-toastify'
 import { Routes, Route } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -26,6 +27,9 @@ const App = () => {
           <Route index
             element={
               <>
+                <Helmet>
+                  <title>Iniciar Sesión</title>
+                </Helmet>
                 <Suspense fallback={ <SpinnerLoadingPage /> }>
                   <Index />
                 </Suspense>

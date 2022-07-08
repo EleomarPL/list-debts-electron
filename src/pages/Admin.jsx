@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 
 import AdminLayout from '../components/layouts/AdminLayout'
 
@@ -15,6 +16,9 @@ const Admin = () => {
         <Route index
           element={
             <>
+              <Helmet>
+                <title>Pagar Deuda</title>
+              </Helmet>
               <PayDebt />
             </>
           }
@@ -22,6 +26,9 @@ const Admin = () => {
         <Route path="add-debtor"
           element={
             <>
+              <Helmet>
+                <title>Agregar Deudor</title>
+              </Helmet>
               <AddDebtor />
             </>
           }
@@ -29,6 +36,9 @@ const Admin = () => {
         <Route path="add-debt"
           element={
             <>
+              <Helmet>
+                <title>Agregar Deuda</title>
+              </Helmet>
               <AddDebt />
             </>
           }
@@ -36,6 +46,9 @@ const Admin = () => {
         <Route path="show-pays"
           element={
             <>
+              <Helmet>
+                <title>Mostrar Pagos de Deudas</title>
+              </Helmet>
               <ShowPays />
             </>
           }
@@ -43,6 +56,9 @@ const Admin = () => {
         <Route path="add-user"
           element={
             <>
+              <Helmet>
+                <title>Agregar Usuario</title>
+              </Helmet>
               <AddUser />
             </>
           }

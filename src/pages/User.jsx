@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet'
 import { Routes, Route } from 'react-router-dom'
 
 import UserLayout from '../components/layouts/UserLayout'
@@ -11,15 +12,21 @@ const User = () => {
     <Routes>
       <Route element={ <UserLayout /> }>
         <Route index
-            element={
-              <>
-                <PayDebt />
-              </>
-            }
-          />
+          element={
+            <>
+              <Helmet>
+                <title>Pagar Deuda</title>
+              </Helmet>
+              <PayDebt />
+            </>
+          }
+        />
         <Route path="add-debtor"
           element={
             <>
+              <Helmet>
+                <title>Agregar Deudor</title>
+              </Helmet>
               <AddDebtor />
             </>
           }
@@ -27,6 +34,9 @@ const User = () => {
         <Route path="add-debt"
           element={
             <>
+              <Helmet>
+                <title>Agregar Deuda</title>
+              </Helmet>
               <AddDebt />
             </>
           }
