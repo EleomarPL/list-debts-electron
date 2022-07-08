@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react'
-import useDebt from '../../hooks/useDebt'
-import DeleteButton from '../buttons/DeleteButton'
 
+import useDebt from '../../hooks/useDebt'
+import useValidationDebt from '../../hooks/validations/useValidationDebt'
+import DeleteButton from '../buttons/DeleteButton'
 import PrimaryButton from '../buttons/PrimaryButton'
 import SecondaryButton from '../buttons/SecondaryButton'
 import PersonalizedTable from '../common/PersonalizedTable'
@@ -15,17 +16,19 @@ const AddDebt = () => {
 
   const formRef = useRef({})
   const { addDebts } = useDebt()
+  const { validateAddDebt } = useValidationDebt()
 
   const handleAddPosibleDebt = (evt) => {
     evt.preventDefault()
-
-    setListDebts([...listDebts, {
-      article: evt.target[0].value,
-      description: evt.target[1].value,
-      total: evt.target[2].value
-    }])
-    setDebtor('')
-    formRef.current.reset()
+    if (validateAddDebt({ evt })) {
+      setListDebts([...listDebts, {
+        article: evt.target[0].value,
+        description: evt.target[1].value,
+        total: evt.target[2].value
+      }])
+      setDebtor('')
+      formRef.current.reset()
+    }
   }
   const handleSaveDebts = () => {
     setIsLoading(true)
