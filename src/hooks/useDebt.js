@@ -33,6 +33,8 @@ const useDebt = () => {
       return false
     }
 
+    notifySuccess('Deuda pagada')
+
     return resultPayDebt
   }
 
