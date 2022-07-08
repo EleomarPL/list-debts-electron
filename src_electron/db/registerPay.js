@@ -16,7 +16,11 @@ const getRegisterPays = async ({ value }) => {
     })
       .populate('idDebtor')
       .populate('idUser')
-    return debts.map(debt => debt.toJSON())
+    return debts.map(debt => ({
+      ...debt.toJSON(),
+      idDebtor: debt.idDebtor.toJSON(),
+      idUser: debt.idUser.toJSON()
+    }))
   } catch (error) {
     return handleErrors({ error })
   }
