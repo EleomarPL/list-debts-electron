@@ -7,6 +7,7 @@ import TitlePage from '../common/TitlePage'
 import ModalModifyDebtor, { openModalModifyDebtor } from '../modals/ModalModifyDebtor'
 import PersonalizedTable from '../common/PersonalizedTable'
 import useDebtor from '../../hooks/useDebtor'
+import useValidationDebtor from '../../hooks/validations/useValidationDebtor'
 
 const AddDebtor = () => {
   const [listDebtors, setListDebtors] = useState([])
@@ -19,6 +20,7 @@ const AddDebtor = () => {
 
   const user = useSelector(state => state.session.value)
   const { insertDebtor, getDebtors } = useDebtor()
+  const { validateCreateDebtor } = useValidationDebtor()
 
   useEffect(() => {
     getDebtors().then(res => {
@@ -28,20 +30,21 @@ const AddDebtor = () => {
 
   const handleAddDebtor = (evt) => {
     evt.preventDefault()
-
-    setIsLoading(true)
-    insertDebtor({
-      name: evt.target[0].value,
-      lastName: evt.target[1].value,
-      motherLastName: evt.target[2].value,
-      address: evt.target[3].value
-    }).then(res => {
-      setIsLoading(false)
-      if (res) {
-        formRef.current.reset()
-        setListDebtors([res, ...listDebtors])
-      }
-    })
+    if (validateCreateDebtor({ evt })) {
+      setIsLoading(true)
+      insertDebtor({
+        name: evt.target[0].value,
+        lastName: evt.target[1].value,
+        motherLastName: evt.target[2].value,
+        address: evt.target[3].value
+      }).then(res => {
+        setIsLoading(false)
+        if (res) {
+          formRef.current.reset()
+          setListDebtors([res, ...listDebtors])
+        }
+      })
+    }
   }
 
   const handleOpenModal = ({ idDebtor, address }) => {

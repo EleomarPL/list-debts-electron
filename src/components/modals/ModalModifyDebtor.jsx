@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 import PrimaryButton from '../buttons/PrimaryButton'
 import useDebtor from '../../hooks/useDebtor'
 import { updateArray } from '../../utils/updateArray'
+import useValidationDebtor from '../../hooks/validations/useValidationDebtor'
 
 export const openModalModifyDebtor = () => {
   const modalTecnologico = new Modal(
@@ -21,28 +22,30 @@ const ModalModifyDebtor = ({ idDebtor, address, listDebtors, setListDebtors }) =
   const inputAddressRef = useRef({})
 
   const { updateDebtor } = useDebtor()
+  const { validateUpdateDebtor } = useValidationDebtor()
 
   const handleModifyDebtor = (evt) => {
     evt.preventDefault()
+    if (validateUpdateDebtor({ evt })) {
+      setIsLoading(true)
 
-    setIsLoading(true)
-
-    updateDebtor({
-      idDebtor,
-      address: evt.target[0].value
-    }).then(res => {
-      setIsLoading(false)
-      if (res) {
-        const newArray = updateArray({
-          array: listDebtors,
-          id: res.id,
-          newData: res
-        })
-        setListDebtors(newArray)
-        const myModal = Modal.getInstance(document.getElementById('ModalModifyDebtor'))
-        myModal.hide()
-      }
-    })
+      updateDebtor({
+        idDebtor,
+        address: evt.target[0].value
+      }).then(res => {
+        setIsLoading(false)
+        if (res) {
+          const newArray = updateArray({
+            array: listDebtors,
+            id: res.id,
+            newData: res
+          })
+          setListDebtors(newArray)
+          const myModal = Modal.getInstance(document.getElementById('ModalModifyDebtor'))
+          myModal.hide()
+        }
+      })
+    }
   }
 
   useEffect(() => {
