@@ -24,8 +24,8 @@ function createWindow () {
     }
   })
 
-  // createMainWindow.loadFile(path.join(__dirname, 'app', 'index.html'))
-  createMainWindow.loadURL('http://localhost:3000')
+  createMainWindow.loadFile(path.join(__dirname, 'app', 'index.html'))
+  // createMainWindow.loadURL('http://localhost:3000')
   createMainWindow.maximize()
 
   triggerEventsInitital()

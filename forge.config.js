@@ -11,9 +11,8 @@ const configLinux = {
     // icon: path.join(__dirname, 'assets', 'logo.png'),
     maintainer: 'Eleomar Pedro Lorenzo',
     homepage: 'https://github.com/EleomarPL/list-debts-electron',
-    version: '0.0.1',
-    productName: 'List Debts',
-    executableName: 'list-debts'
+    productName: 'Control de Deudas',
+    executableName: 'control-deudas'
   }
 }
 
