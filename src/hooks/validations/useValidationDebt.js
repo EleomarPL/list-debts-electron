@@ -14,7 +14,7 @@ const useValidationDebt = () => {
   const validateAddDebt = ({ evt }) => {
     const dataString = {
       article: {
-        name: 'Articulo',
+        name: 'Artículo',
         minLength: rules.article.min,
         maxLength: rules.article.max,
         value: evt.target[0].value

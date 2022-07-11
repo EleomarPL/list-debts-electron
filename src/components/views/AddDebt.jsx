@@ -61,13 +61,13 @@ const AddDebt = () => {
               ref={ formRef }
             >
               <div className="mb-3 w-100">
-                <label htmlFor="article" className="form-label">Articulo</label>
+                <label htmlFor="article" className="form-label">Artículo</label>
                 <input type="text" className="form-control"
                   id="article" autoFocus={ true }
                 />
               </div>
               <div className="mb-3 w-100">
-                <label htmlFor="description" className="form-label">Descripcion</label>
+                <label htmlFor="description" className="form-label">Descripción</label>
                 <textarea type="text" className="form-control"
                   id="description" autoFocus={ true }
                 />
@@ -100,7 +100,7 @@ const AddDebt = () => {
             <PersonalizedTable>
               <thead>
                 <tr>
-                  <th>Articulo</th>
+                  <th>Artículo</th>
                   <th>Total</th>
                   <th>Eliminar</th>
                 </tr>

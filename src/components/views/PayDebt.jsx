@@ -80,8 +80,8 @@ const PayDebt = () => {
             <thead>
               <tr>
                 <th>Cobrar</th>
-                <th>Articulo</th>
-                <th>Descripcion</th>
+                <th>Artículo</th>
+                <th>Descripción</th>
                 <th>Total</th>
               </tr>
             </thead>

@@ -29,8 +29,8 @@ const ShowPays = () => {
       <PersonalizedTable>
         <thead>
           <tr>
-            <th>Articulo</th>
-            <th>Descripcion</th>
+            <th>Artículo</th>
+            <th>Descripción</th>
             <th>Deudor</th>
             <th>Total</th>
             <th>Fecha</th>
