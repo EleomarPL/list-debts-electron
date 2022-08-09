@@ -1,0 +1,12 @@
+# Install mongodb
+version: 'latest'
+
+services:
+  mongo:
+    image: mongo
+    container_name: mongodb
+    # path to the mongodb data - this is where the data is stored
+    volumes:
+      - /home/eleomarpl/Documentos/database:/data/db
+    ports:
+      - 27017:27017
