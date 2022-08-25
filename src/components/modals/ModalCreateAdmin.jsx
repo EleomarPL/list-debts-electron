@@ -53,7 +53,7 @@ const ModalCreateAdmin = () => {
             <h5 className="modal-title fw-bold" id="staticBackdropLabel">
               Crear Administrador
             </h5>
-            <button type="button" className="btn-close"
+            <button type="button" className="btn-close bg-light"
               data-bs-dismiss="modal" aria-label="Close"
             >
             </button>

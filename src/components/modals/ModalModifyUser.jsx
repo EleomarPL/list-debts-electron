@@ -77,7 +77,7 @@ const ModalModifyUser = ({ dataUser, listUsers, setListUsers }) => {
             <h5 className="modal-title fw-bold" id="staticBackdropLabel">
               Modificar Usuario
             </h5>
-            <button type="button" className="btn-close"
+            <button type="button" className="btn-close bg-light"
               data-bs-dismiss="modal" aria-label="Close"
             >
             </button>

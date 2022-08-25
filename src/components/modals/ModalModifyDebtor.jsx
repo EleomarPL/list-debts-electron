@@ -61,7 +61,7 @@ const ModalModifyDebtor = ({ idDebtor, address, listDebtors, setListDebtors }) =
         <div className="modal-content" style={ { backgroundColor: 'var(--bg-primary)' } }>
           <div className="modal-header">
             <h5 className="modal-title fw-bold" id="staticBackdropLabel">Modificar</h5>
-            <button type="button" className="btn-close"
+            <button type="button" className="btn-close bg-light"
               data-bs-dismiss="modal" aria-label="Close"
             >
             </button>
