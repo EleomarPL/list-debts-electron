@@ -50,7 +50,7 @@ const ModalModifyDebtor = ({ idDebtor, address, listDebtors, setListDebtors }) =
 
   useEffect(() => {
     inputAddressRef.current.value = address
-  }, [address])
+  }, [address, idDebtor])
 
   return (
     <div className="modal fade" id="ModalModifyDebtor"
