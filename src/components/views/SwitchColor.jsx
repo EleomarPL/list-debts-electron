@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import '../../switchColor.css'
 
 const SwitchColor = () => {
-  const [isDark, setIsDark] = useState(true)
+  const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
     const root = document.documentElement
