@@ -15,6 +15,7 @@ const AddDebt = () => {
   const [isLoading, setIsLoading] = useState(false)
 
   const formRef = useRef({})
+  const articleInputRef = useRef({})
   const { addDebts } = useDebt()
   const { validateAddDebt } = useValidationDebt()
 
@@ -27,6 +28,7 @@ const AddDebt = () => {
         total: evt.target[2].value
       }])
       formRef.current.reset()
+      articleInputRef.current.focus()
     }
   }
   const handleSaveDebts = () => {
@@ -64,18 +66,19 @@ const AddDebt = () => {
                 <label htmlFor="article" className="form-label">Artículo</label>
                 <input type="text" className="form-control"
                   id="article" autoFocus={ true }
+                  ref={ articleInputRef }
                 />
               </div>
               <div className="mb-3 w-100">
                 <label htmlFor="description" className="form-label">Descripción</label>
                 <textarea type="text" className="form-control"
-                  id="description" autoFocus={ true }
+                  id="description"
                 />
               </div>
               <div className="mb-3 w-100">
                 <label htmlFor="total" className="form-label">Total</label>
                 <input type="text" className="form-control"
-                  id="total" autoFocus={ true }
+                  id="total"
                 />
               </div>
               <PrimaryButton
