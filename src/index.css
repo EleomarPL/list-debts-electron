@@ -1,8 +1,8 @@
 :root{
-  --text-primary: #ffffff;
-  --text-secondary: #c6c6c6;
-  --bg-primary: #212121;
-  --bg-secondary: #37474f;
+  --text-primary: #212121;
+  --text-secondary: #646464;
+  --bg-primary: #eceff1;
+  --bg-secondary: #cfd8dc;
   --border-primary: #757575;
 }
 body {
